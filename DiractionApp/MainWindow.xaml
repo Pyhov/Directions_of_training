@@ -1,0 +1,86 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DiractionApp"
+        xmlns:converts="clr-namespace:DiractionApp.Converters"
+        xmlns:Views="clr-namespace:DiractionApp.Views" 
+        x:Class="DiractionApp.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="900">
+    <Window.Resources>
+        <converts:ProfilePrioretyToVisibility x:Key="NameToMessageConvert"/>
+        <DataTemplate x:Key="CatalogTemplate">
+            <Grid Margin="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button  Grid.Column="2"  Height="20" VerticalAlignment="Top" 
+                         HorizontalAlignment="Right" Width="20" 
+                         FontSize="22" Margin="0,10,10,10" 
+                         GotMouseCapture="Button_GotMouseCapture"
+                         Command="{Binding RelativeSource={RelativeSource  AncestorType={x:Type ListBox}}, Path=DataContext.DirectionAddCommand}"
+                         CommandParameter="{Binding RelativeSource={RelativeSource  AncestorType={x:Type ListBox}}, Path=DataContext.DirectionSelect}"
+                         Background="White" 
+                         BorderBrush="White">
+                    <Image Source="/Icons/Plus-Symbol-PNG-Image.png"/>
+                </Button>
+                <TextBlock  Margin="0,0,0,0"  Text="{Binding Position}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" />
+                <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal">
+                    <TextBlock Text="{Binding Code}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0"/>
+                    <TextBlock Text="{Binding Title}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,10,0,0"/>
+                </StackPanel>
+                <ListBox Grid.Row="1" VerticalAlignment="Top"  ItemsSource="{Binding Profiles}"
+                         Grid.ColumnSpan="2" Margin="25,0,6,0" Grid.Column="1" BorderBrush="White">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel Grid.Column="2" LastChildFill="False">
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Name}" Width="350"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Faculty}" Width="50" TextAlignment="Right"/>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+
+
+            </Grid>
+
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        <Menu Height="25" Grid.Row="0" VerticalAlignment="Top">
+            <MenuItem Header="Сменить пользователя" Click="MenuItem_Click" />
+        </Menu>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" MinWidth="550"/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label  Content="Направления" Grid.Column="0" Margin="10,10,0,0" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="232" FontWeight="Bold" FontSize="16" />
+
+            <GridSplitter Grid.Column="1" ShowsPreview="False" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
+            <ListBox x:Name="CatalogView" ItemsSource="{Binding Diractions}" SelectedItem="{Binding DirectionSelect}" Grid.Column="0" Margin="0,0,0,0" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource CatalogTemplate}"/>
+            <ContentControl x:Name="cartContent" Grid.Column="2" Margin="0" HorizontalContentAlignment="Stretch">
+
+              
+            </ContentControl>
+
+        </Grid>
+
+    </Grid>
+</Window>

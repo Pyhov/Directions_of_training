@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Icons\close.png" />
+    <None Remove="Icons\down.png" />
+    <None Remove="Icons\up.png" />
+    <None Remove="Plus-Symbol-PNG-Image.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Directions_of_training.BLL\Directions_of_training.BLL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Icons\close.png" />
+    <Resource Include="Icons\down.png" />
+    <Resource Include="Icons\Plus-Symbol-PNG-Image.png" />
+    <Resource Include="Icons\up.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="napravleniya-podgotovki-i-spetsialnosti.tsv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
